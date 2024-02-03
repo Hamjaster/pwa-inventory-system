@@ -81,7 +81,7 @@ function Chart() {
                 {/* Mapping to render legends */}
                 <div className="legends justify-center flex text-sm flex-col sm:flex-row">
                     {chartData && Object.keys(chartData).map((legend) => {
-                        return <div className='flex mx-4 space-x-2 items-center flex-row '>
+                        return <div key={legend} className='flex mx-4 space-x-2 items-center flex-row '>
                             <div className={`sm:w-4 w-3 sm:h-4 h-3 rounded-full ${legend === 'User' ? 'bg-[#9BDD7C]' : 'bg-[#E9A0A0]'} `}> </div>
                             <div>{legend}</div>
                         </div>

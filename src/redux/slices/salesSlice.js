@@ -8,13 +8,17 @@ export const fetchSales = createAsyncThunk('sales/fetchSales', async () => {
 });
 
 export const addSale = createAsyncThunk('sales/addSale', async ({ product, category, customer, qty, totalPrice }) => {
-    const response = await axios.post('/api/sale', { product, category, customer, qty, totalPrice });
-    return response.data;
+    try {
+        const response = await axios.post('/api/sale', { product, category, customer, qty, totalPrice });
+        return response.data;
+    } catch (error) {
+        throw error
+    }
 });
 
 const salesSlice = createSlice({
     name: 'sales',
-    initialState: { sales: [], loading: false, hasRun: false },
+    initialState: { sales: [], loading: false, hasRun: false, error: "" },
     reducers: {
         setFunctionHasRun: (state) => {
             state.hasRun = true;
@@ -29,8 +33,9 @@ const salesSlice = createSlice({
                 state.loading = false;
                 state.sales = action.payload.message;
             })
-            .addCase(fetchSales.rejected, (state) => {
+            .addCase(fetchSales.rejected, (state, action) => {
                 state.loading = false;
+                state.error = action.payload.message
                 // Handle rejection if needed
             })
             .addCase(addSale.fulfilled, (state, action) => {

@@ -37,6 +37,7 @@ export default function Dashboard() {
             <div className="first grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4  h-1/5 gap-5 ">
                 {cardData && cardData.map((card) => {
                     return <Card
+                        key={card.title}
                         bg={card.bg}
                         icon={card.icon}
                         text={card.title}
