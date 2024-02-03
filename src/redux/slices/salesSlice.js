@@ -35,7 +35,6 @@ const salesSlice = createSlice({
             })
             .addCase(fetchSales.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message
                 // Handle rejection if needed
             })
             .addCase(addSale.fulfilled, (state, action) => {
