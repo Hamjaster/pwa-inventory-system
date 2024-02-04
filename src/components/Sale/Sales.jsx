@@ -15,17 +15,14 @@ import { fetchSales } from '@/redux/slices/salesSlice';
 import { setFunctionHasRun } from '@/redux/slices/salesSlice';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive'
 
 export default function Sales() {
 
     const [searchQuery, setSearchQuery] = useState("")
     const dispatch = useDispatch()
     const { sales, loading, hasRun } = useSelector(state => state.sales)
-
-    if (!hasRun) {
-        dispatch(fetchSales())
-        dispatch(setFunctionHasRun());
-    }
+    const isSmall = useMediaQuery({ query: '(max-width: 640px)' })
 
     const tableCustomStyles = {
         headCells: {
@@ -50,8 +47,20 @@ export default function Sales() {
             style: {
                 margin: 0
             }
+        },
+        table: {
+            style: {
+                width: isSmall ? '80vw' : "100%"
+            }
         }
 
+
+
+    }
+
+    if (!hasRun) {
+        dispatch(fetchSales())
+        dispatch(setFunctionHasRun());
     }
 
     const columns = [
@@ -76,7 +85,7 @@ export default function Sales() {
             name: 'Qty',
             selector: row => row.qty,
             cell: row => <span>{row.qty}</span>,
-            width: '10%'
+
         },
         {
             name: 'Total(Rs)',
@@ -159,9 +168,9 @@ export default function Sales() {
             <div className='text-4xl text-[#0062ca] font-semibold text-left uppercase mb-5'>
                 Your Sales
             </div>
-            <div className="actions bg-[#] bg-white px-4 py-3 flex flex-row items-center justify-between space-x-1">
+            <div className="actions bg-[#] bg-white py-3 flex flex-col sm:flex-row items-center justify-between sm:space-x-1">
 
-                <div className="input relative w-2/4 sm:w-2/4">
+                <div className="input relative w-full sm:w-2/4">
                     <div className="icons  text-[#00BE95] absolute top-1/2 right-3 -translate-y-1/2">
                         <FaSearch />
                     </div>
@@ -169,7 +178,7 @@ export default function Sales() {
                         setSearchQuery(e.target.value)
                     }} />
                 </div>
-                <div className="actions w-2/4 sm:w-1/4">
+                <div className="actions w-full sm:w-1/4">
                     <Link href={'/sales/add'} className="create flex justify-center flex-row items-center space-x-2 bg-[#00BE95] hover:bg-[#01876a] transition-all text-white text-center px-0 py-3 sm:px-4 text-sm sm:text-lg sm:py-2 cursor-pointer">
                         <div className="icon text-2xl text-white">
                             <IoIosAddCircle />
@@ -182,7 +191,7 @@ export default function Sales() {
 
             </div>
 
-            <div className="table mt-12  min-w-full">
+            <div className="table mt-6 w-full">
                 {
                     loading
                         ?

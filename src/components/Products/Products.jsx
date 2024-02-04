@@ -8,13 +8,14 @@ import { VscLoading } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { fetchProducts, setFunctionHasRun } from '@/redux/slices/productsSlice';
-
+import { useMediaQuery } from 'react-responsive'
 
 export default function Products() {
 
     const [searchQuery, setSearchQuery] = useState("")
     const { products, loading, hasRun } = useSelector(state => state.products)
     const dispatch = useDispatch()
+    const isSmall = useMediaQuery({ query: '(max-width: 640px)' })
 
     useEffect(() => {
         if (!hasRun) {
@@ -23,11 +24,13 @@ export default function Products() {
         }
     }, [])
 
+
+
     const tableCustomStyles = {
         headCells: {
             style: {
                 fontSize: '20px',
-                paddingLeft: '0 8px',
+                // paddingLeft: '0 8px',
                 justifyContent: 'center',
                 background: '#00b6ee60',
                 color: '#007FCF',
@@ -37,7 +40,7 @@ export default function Products() {
         cells: {
             style: {
                 fontSize: '17px',
-                padding: '15px 10px',
+                padding: '0px',
                 justifyContent: 'center',
                 margin: '0px',
             }
@@ -46,9 +49,17 @@ export default function Products() {
             style: {
                 margin: 0
             }
+        },
+        table: {
+            style: {
+                width: isSmall ? '80vw' : "100%"
+            }
         }
 
+
+
     }
+
 
     const handleDelete = async (id) => {
         const res = await deleteProduct(id)
@@ -62,7 +73,6 @@ export default function Products() {
             name: 'Title',
             selector: row => row.title,
             cell: row => <span>{row.title}</span>,
-            width: '20%'
 
         },
         {
@@ -75,18 +85,6 @@ export default function Products() {
             cell: row => <span>{row.stock}</span>,
             selector: row => row.stock,
         },
-        // {
-        //     name: 'Action',
-        //     cell: (r) => {
-        //         return (
-        //             <span className='flex flex-row text-3xl space-x-6 items-center'>
-        //                 <div onClick={() => handleDelete(r._id)} className="del text-red-500 hover:text-red-700 transition-all cursor-pointer">
-        //                     <MdDelete />
-        //                 </div>
-        //             </span>
-        //         )
-        //     }
-        // }
     ];
 
     const paginationComponentOptions = {
@@ -117,9 +115,9 @@ export default function Products() {
 
         <>
 
-            <div className="actions bg-[#] bg-white px-4 py-3 flex flex-row items-center justify-between space-x-1">
+            <div className="actions bg-[#] bg-white py-3 flex flex-col items-center justify-between w-full sm:space-x-1">
 
-                <div className="input relative w-2/4 sm:w-2/4">
+                <div className="input relative w-full sm:w-2/4">
                     <div className="icons  text-[#00BE95] absolute top-1/2 right-3 -translate-y-1/2">
                         <FaSearch />
                     </div>
@@ -127,18 +125,19 @@ export default function Products() {
                         setSearchQuery(e.target.value)
                     }} />
                 </div>
-                <div className="actions w-2/4 sm:w-1/4">
-                    {/* <Link to={'/products/add'} className="create flex justify-center flex-row items-center space-x-2 bg-[#00BE95] hover:bg-[#01876a] transition-all text-white text-center px-2 py-3 sm:px-4 text-sm sm:text-lg sm:py-2 cursor-pointer">
+                <div className="actions w-full sm:w-1/4">
+                    {/* <div to={'/products/add'} className="create flex justify-center flex-row items-center space-x-2 bg-[#00BE95] hover:bg-[#01876a] transition-all text-white text-center px-2 py-3 sm:px-4 text-sm sm:text-lg sm:py-2 cursor-pointer">
                         <div className="icon text-2xl text-white">
                             <IoIosAddCircle />
                         </div>
                         <div className="text">
                             Add Prodcut
                         </div>
-                    </Link> */}
+                    </div> */}
                 </div>
 
             </div>
+
 
             <div className="table mt-12 min-w-full">
                 {

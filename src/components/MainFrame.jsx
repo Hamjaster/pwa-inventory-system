@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function MainFrame({ children }) {
 
-    const [showSidebar, setShowSidebar] = useState(true)
+    const [showSidebar, setShowSidebar] = useState(false)
 
     return (
 
@@ -48,7 +48,7 @@ export default function MainFrame({ children }) {
         </Routes>
 
     </Suspense> */}
-                <div className="p-10">
+                <div className="px-10 py-3">
                     {children}
                 </div>
 

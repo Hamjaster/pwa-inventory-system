@@ -1,3 +1,4 @@
+
 export const parseDate = (date) => {
     const originalDate = new Date(date);
 
@@ -21,3 +22,4 @@ export function formatLargeNumber(number) {
         return number.toString();
     }
 }
+

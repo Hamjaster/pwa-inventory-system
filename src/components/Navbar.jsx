@@ -8,7 +8,7 @@ export default function Navbar({ showSidebar, setShowSidebar }) {
 
 
     return (
-        <nav className="flex sm:hidden  flex-row justify-between mb-3">
+        <nav className="flex sm:hidden  flex-row justify-between mb-3 px-10 py-4">
             <strong className='text-xl sm:text-2xl '>Inventory Management System</strong>
 
             <div className="info hidden sm:flex space-x-10">

@@ -9,11 +9,13 @@ import { VscLoading } from 'react-icons/vsc';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchSuppliers, setFunctionHasRun } from '@/redux/slices/suppliersSlice';
+import { useMediaQuery } from 'react-responsive'
 
 export default function Suppliers() {
     const [searchQuery, setSearchQuery] = useState("")
     const dispatch = useDispatch();
     const { suppliers, loading, hasRun } = useSelector(state => state.suppliers)
+    const isSmall = useMediaQuery({ query: '(max-width: 640px)' })
 
     console.log(suppliers, loading)
 
@@ -26,11 +28,12 @@ export default function Suppliers() {
 
     }, [])
 
+
     const tableCustomStyles = {
         headCells: {
             style: {
                 fontSize: '20px',
-                paddingLeft: '0 8px',
+                // paddingLeft: '0 8px',
                 justifyContent: 'center',
                 background: '#00b6ee60',
                 color: '#007FCF',
@@ -40,7 +43,7 @@ export default function Suppliers() {
         cells: {
             style: {
                 fontSize: '17px',
-                padding: '15px 10px',
+                padding: '0px',
                 justifyContent: 'center',
                 margin: '0px',
             }
@@ -49,7 +52,14 @@ export default function Suppliers() {
             style: {
                 margin: 0
             }
+        },
+        table: {
+            style: {
+                width: isSmall ? '80vw' : "100%"
+            }
         }
+
+
 
     }
 
@@ -95,9 +105,9 @@ export default function Suppliers() {
 
         <>
 
-            <div className="actions bg-[#] bg-white px-4 py-3 space-x-2 flex flex-row items-center justify-between">
+            <div className="actions bg-[#] bg-white py-3 space-x-2 flex flex-col items-center justify-between">
 
-                <div className="input relative w-3/5 sm:w-2/4 ">
+                <div className="input relative w-full sm:w-2/4 ">
                     <div className="icons  text-[#00BE95] absolute top-1/2 right-3 -translate-y-1/2">
                         <FaSearch />
                     </div>
