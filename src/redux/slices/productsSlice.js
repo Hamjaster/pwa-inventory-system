@@ -16,8 +16,11 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: { products: [], loading: false, hasRun: false },
     reducers: {
-        setFunctionHasRun: (state) => {
+        setProductsHasRun: (state) => {
             state.hasRun = true;
+        },
+        setProductsHasNotRun: (state) => {
+            state.hasRun = false;
         }
     },
     extraReducers: (builder) => {
@@ -42,4 +45,4 @@ const productsSlice = createSlice({
 });
 
 export default productsSlice.reducer;
-export const { setFunctionHasRun } = productsSlice.actions;
+export const { setProductsHasRun, setProductsHasNotRun } = productsSlice.actions;

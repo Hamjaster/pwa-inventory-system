@@ -7,7 +7,7 @@ import { CgSpinner } from "react-icons/cg";
 import { redirect } from 'next/navigation'
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux'
-import { fetchProducts, setFunctionHasRun } from '@/redux/slices/productsSlice'
+import { fetchProducts, setProductsHasNotRun, setProductsHasRun } from '@/redux/slices/productsSlice'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { addSale } from '@/redux/slices/salesSlice'
@@ -21,7 +21,7 @@ export default function AddSale() {
     useEffect(() => {
         if (!hasRun) {
             dispatch(fetchProducts())
-            dispatch(setFunctionHasRun());
+            dispatch(setProductsHasRun());
         }
     }, [])
 
@@ -56,6 +56,7 @@ export default function AddSale() {
             qty: Number(formData.quantity),
             totalPrice: Number(formData.price)
         }))
+        dispatch(setProductsHasNotRun())
 
         router.push("/sales")
     };

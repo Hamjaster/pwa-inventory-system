@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 
 import toast from 'react-hot-toast'
 import { useSelector } from 'react-redux'
-import { fetchProducts } from '@/redux/slices/productsSlice'
+import { fetchProducts, setProductsHasNotRun } from '@/redux/slices/productsSlice'
 import { useDispatch } from 'react-redux'
 import { fetchSuppliers, setFunctionHasRun } from '@/redux/slices/suppliersSlice'
 import { addPurchase } from '@/redux/slices/purchasesSlice'
@@ -86,6 +86,7 @@ export default function AddPurchase() {
         console.log(product_id)
 
         dispatch(addPurchase({ product: product_id, category: formData.category, supplier: formData.supplier, qty: Number(formData.quantity), totalPrice: Number(formData.price) }))
+        dispatch(setProductsHasNotRun());
         router.push("/purchases")
         setLoading(false)
     };

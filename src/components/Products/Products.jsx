@@ -7,7 +7,7 @@ import { BiArrowFromLeft } from 'react-icons/bi';
 import { VscLoading } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { fetchProducts, setFunctionHasRun } from '@/redux/slices/productsSlice';
+import { fetchProducts, setProductsHasRun } from '@/redux/slices/productsSlice';
 import { useMediaQuery } from 'react-responsive'
 
 export default function Products() {
@@ -20,7 +20,7 @@ export default function Products() {
     useEffect(() => {
         if (!hasRun) {
             dispatch(fetchProducts())
-            dispatch(setFunctionHasRun());
+            dispatch(setProductsHasRun());
         }
     }, [])
 

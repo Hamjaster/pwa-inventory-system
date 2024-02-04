@@ -11,6 +11,7 @@ import { fetchPurchases, setFunctionHasRun } from '@/redux/slices/purchasesSlice
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive'
+import { setProductsHasNotRun, setProductsHasRun } from '@/redux/slices/productsSlice';
 
 export default function Purchases() {
     const [searchQuery, setSearchQuery] = useState("")
@@ -56,6 +57,7 @@ export default function Purchases() {
         if (!hasRun) {
             dispatch(fetchPurchases())
             dispatch(setFunctionHasRun());
+
         }
     }, [])
 
