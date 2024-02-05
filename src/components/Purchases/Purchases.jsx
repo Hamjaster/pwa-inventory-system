@@ -23,10 +23,11 @@ export default function Purchases() {
         headCells: {
             style: {
                 fontSize: '20px',
+                margin: '0px 10px',
                 // paddingLeft: '0 8px',
                 justifyContent: 'center',
-                background: '#00b6ee60',
-                color: '#007FCF',
+
+                padding: '0px',
                 // color: 'white'
             },
         },
@@ -35,7 +36,7 @@ export default function Purchases() {
                 fontSize: '17px',
                 padding: '0px',
                 justifyContent: 'center',
-                margin: '0px',
+                margin: '0px 10px',
             }
         },
         rows: {
@@ -135,7 +136,7 @@ export default function Purchases() {
     return (
 
         <>
-            <div className='text-4xl text-[#0062ca] font-semibold text-left uppercase mb-5'>
+            <div className='text-xl sm:text-4xl text-[#0062ca] font-semibold text-left uppercase mb-5'>
                 Your Purchases
             </div>
             <div className="actions bg-[#] bg-white py-3 flex flex-col sm:flex-row items-center justify-between sm:space-x-1">
